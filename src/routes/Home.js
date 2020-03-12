@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 
 function Home() {
   const [text, setText] = useState("");
@@ -21,4 +22,11 @@ function Home() {
   );
 }
 
-export default Home;
+//take state from store to home
+//map state from redux store to props from component
+//use to get somthing from store and put it into props
+function mapStateToProps(state) {
+  return { toDos: state };
+}
+
+export default connect(mapStateToProps)(Home);
