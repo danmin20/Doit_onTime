@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import Clock from "react-live-clock";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { actionCreators } from "../store";
 import ToDo from "../components/ToDo";
 import bgImage from "../bg.jpg";
+import Date from "../components/Date";
 
 const Img = styled.div`
   position: fixed;
@@ -18,14 +20,22 @@ const Img = styled.div`
 `;
 
 const Title = styled.div`
-  margin-top: 100px;
+  margin-top: 20px;
   font-family: "Lobster", cursive;
-  font-size: 70px;
+  font-size: 20px;
+  color: white;
+`;
+
+const Time = styled.div`
+  width: 200px;
+  margin-top: 10px;
+  font-family: "Lobster", cursive;
+  font-size: 60px;
   color: white;
 `;
 
 const Form = styled.form`
-  margin-top: 30px;
+  margin-top: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -51,9 +61,12 @@ function Home({ toDos, addToDo }) {
   return (
     <Img>
       <Title>ToDo</Title>
+      <Date />
+      <Time>
+        <Clock format={"HH:mm:ss"} ticking={true} />
+      </Time>
       <Form onSubmit={onSubmit}>
         <input type="text" value={text} onChange={onChange} />
-        <button>+</button>
       </Form>
       <List>
         <ul>
