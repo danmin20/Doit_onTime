@@ -2,18 +2,28 @@ import { createStore } from "redux";
 
 const ADD = "ADD";
 const DELETE = "DELETE";
+const BOOL = "BOOL";
 
-const addToDo = text => {
+const addToDo = (text) => {
   return {
     type: ADD,
-    text
+    text,
+    bool: false,
   };
 };
 
-const deleteToDo = id => {
+const deleteToDo = (id) => {
   return {
     type: DELETE,
-    id
+    id,
+  };
+};
+
+const doneToDo = (id, bool) => {
+  return {
+    type: BOOL,
+    id,
+    bool,
   };
 };
 
@@ -34,11 +44,22 @@ const reducer = (state = [], action) => {
   state = toDos;
   switch (action.type) {
     case ADD:
-      toDos = [{ text: action.text, id: Date.now() }, ...state];
+      toDos = [
+        { text: action.text, id: Date.now(), bool: action.bool },
+        ...state,
+      ];
       saveToDos();
       return toDos;
     case DELETE:
-      toDos = state.filter(toDo => toDo.id !== action.id);
+      toDos = state.filter((toDo) => toDo.id !== action.id);
+      saveToDos();
+      return toDos;
+    case BOOL:
+      for (var i = 0; i < toDos.length; i++) {
+        if (toDos[i].id === action.id) {
+          toDos[i].bool = !action.bool;
+        }
+      }
       saveToDos();
       return toDos;
     default:
@@ -50,7 +71,8 @@ const store = createStore(reducer);
 
 export const actionCreators = {
   addToDo,
-  deleteToDo
+  deleteToDo,
+  doneToDo,
 };
 
 export default store;

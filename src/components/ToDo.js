@@ -28,21 +28,26 @@ const List = styled.div`
   opacity: 0.8;
 `;
 
-function ToDo({ text, onBtnClick }) {
-  const [isDone, setIsDone] = useState(false);
-  const toggleDone = () => setIsDone(!isDone);
+function ToDo({ text, bool, onBtnClick, toggleDone }) {
+  function onClick() {
+    toggleDone(!bool);
+  }
   return (
     <List>
-      <Eye onClick={toggleDone}>{isDone ? "👍" : "👀"}</Eye>
-      <Txt deco={isDone && "line-through"}>{text}</Txt>
+      <Eye onClick={onClick}>{bool ? "👍" : "👀"}</Eye>
+      <Txt deco={bool && "line-through"}>{text}</Txt>
       <Btn onClick={onBtnClick}>X</Btn>
     </List>
   );
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
+  console.log(ownProps);
+
   return {
     onBtnClick: () => dispatch(actionCreators.deleteToDo(ownProps.id)),
+    toggleDone: () =>
+      dispatch(actionCreators.doneToDo(ownProps.id, ownProps.bool)),
   };
 }
 
