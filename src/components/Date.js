@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 const Today = styled.div`
-  margin-top: 80px;
-  font-family: "Lobster", cursive;
+  margin-top: 50px;
+  font-family: 'Gaegu', cursive;
   opacity: 0.5;
   font-size: 25px;
 `;
@@ -22,6 +22,6 @@ export default () => {
     mm = "0" + mm;
   }
 
-  today = yyyy + " " + mm + " " + dd;
+  today = yyyy + "." + mm + "." + dd;
   return <Today>{today}</Today>;
 };

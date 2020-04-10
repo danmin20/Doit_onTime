@@ -4,32 +4,29 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import { actionCreators } from "../store";
 import ToDo from "../components/ToDo";
-import bgImage from "../bg.jpg";
 import Date from "../components/Date";
 
-const Img = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
+const Container = styled.div`
+  position: absolute;
+  background-color: #EBAD9B;
+  display: flex;
   width: 100%;
   height: 100%;
-  background-image: url(${bgImage});
-  display: flex;
+  min-height: 500px;
   align-items: center;
   flex-direction: column;
 `;
 
 const Title = styled.div`
-  margin-top: 20px;
-  font-family: "Lobster", cursive;
-  font-size: 20px;
-  color: white;
+  margin-top: 80px;
+  font-family: 'Gaegu', cursive;
+  font-size: 30px;
 `;
 
 const Time = styled.div`
   width: 200px;
   margin-top: 10px;
-  font-family: "Lobster", cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 60px;
   color: white;
 `;
@@ -59,8 +56,8 @@ function Home({ toDos, addToDo }) {
     setText("");
   }
   return (
-    <Img>
-      <Title>ToDo</Title>
+    <Container>
+      <Title>🙈 할 일은 제때제때 🙉</Title>
       <Date />
       <Time>
         <Clock format={"HH:mm:ss"} ticking={true} />
@@ -70,12 +67,12 @@ function Home({ toDos, addToDo }) {
       </Form>
       <List>
         <ul>
-          {toDos.map(toDo => (
+          {toDos.map((toDo) => (
             <ToDo {...toDo} key={toDo.id} />
           ))}
         </ul>
       </List>
-    </Img>
+    </Container>
   );
 }
 
@@ -89,7 +86,7 @@ function mapStateToProps(state) {
 //create function and send it to props
 function mapDispatchToProps(dispatch) {
   return {
-    addToDo: text => dispatch(actionCreators.addToDo(text))
+    addToDo: (text) => dispatch(actionCreators.addToDo(text)),
   };
 }
 
