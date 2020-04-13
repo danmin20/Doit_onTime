@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { actionCreators } from "../store";
@@ -42,8 +42,6 @@ function ToDo({ text, bool, onBtnClick, toggleDone }) {
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
-  console.log(ownProps);
-
   return {
     onBtnClick: () => dispatch(actionCreators.deleteToDo(ownProps.id)),
     toggleDone: () =>
