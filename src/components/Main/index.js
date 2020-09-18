@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import { actionCreators } from "../../store/actions";
 import ToDo from "../ToDo";
-import Date from "../Date/Date";
+import Date from "../Date";
 
 import "./style.scss";
 
