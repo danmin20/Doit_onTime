@@ -17,8 +17,9 @@ function App({ toDos, addToDo }) {
   function onSubmit(e) {
     e.preventDefault();
     addToDo(text);
+    setText("");
   }
-  
+
   return (
     <Container>
       <Title>🙈 할 일은 제때제때 🙉</Title>
