@@ -1,31 +1,4 @@
-import { createStore } from "redux";
-
-const ADD = "ADD";
-const DELETE = "DELETE";
-const BOOL = "BOOL";
-
-const addToDo = (text) => {
-  return {
-    type: ADD,
-    text,
-    bool: false,
-  };
-};
-
-const deleteToDo = (id) => {
-  return {
-    type: DELETE,
-    id,
-  };
-};
-
-const doneToDo = (id, bool) => {
-  return {
-    type: BOOL,
-    id,
-    bool,
-  };
-};
+import { ADD, DELETE, BOOL, EDIT } from "./actionTypes";
 
 let toDos = [];
 const saveToDos = () => {
@@ -39,7 +12,7 @@ const loadToDos = () => {
   }
 };
 
-const reducer = (state = [], action) => {
+export default (state = [], action) => {
   loadToDos();
   state = toDos;
   switch (action.type) {
@@ -50,29 +23,31 @@ const reducer = (state = [], action) => {
       ];
       saveToDos();
       return toDos;
+
     case DELETE:
       toDos = state.filter((toDo) => toDo.id !== action.id);
       saveToDos();
       return toDos;
+
     case BOOL:
-      for (var i = 0; i < toDos.length; i++) {
+      for (let i = 0; i < toDos.length; i += 1) {
         if (toDos[i].id === action.id) {
           toDos[i].bool = !action.bool;
         }
       }
       saveToDos();
       return toDos;
+
+    case EDIT:
+      for (let i = 0; i < toDos.length; i += 1) {
+        if (toDos[i].id === action.id) {
+          toDos[i].text = action.text;
+        }
+      }
+      saveToDos();
+      return toDos;
+
     default:
       return state;
   }
 };
-
-const store = createStore(reducer);
-
-export const actionCreators = {
-  addToDo,
-  deleteToDo,
-  doneToDo,
-};
-
-export default store;

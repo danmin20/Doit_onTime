@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const Today = styled.div`
   margin-top: 50px;
-  font-family: 'Gaegu', cursive;
+  font-family: "Gaegu", cursive;
   opacity: 0.5;
   font-size: 25px;
 `;
@@ -14,14 +14,9 @@ export default () => {
   let mm = today.getMonth() + 1;
   const yyyy = today.getFullYear();
 
-  if (dd < 10) {
-    dd = "0" + dd;
-  }
-
-  if (mm < 10) {
-    mm = "0" + mm;
-  }
-
+  if (dd < 10) dd = "0" + dd;
+  if (mm < 10) mm = "0" + mm;
   today = yyyy + "." + mm + "." + dd;
+
   return <Today>{today}</Today>;
 };
