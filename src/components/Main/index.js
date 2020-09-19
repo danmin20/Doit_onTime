@@ -8,6 +8,17 @@ import Date from "../Date";
 
 import "./style.scss";
 
+const Emoji = (props) => (
+  <span
+    className="emoji"
+    role="img"
+    aria-label={props.label ? props.label : ""}
+    aria-hidden={props.label ? "false" : "true"}
+  >
+    {props.symbol}
+  </span>
+);
+
 function App({ toDos, addToDo }) {
   const [text, setText] = useState("");
 
@@ -22,7 +33,10 @@ function App({ toDos, addToDo }) {
 
   return (
     <Container>
-      <Title>🙈 할 일은 제때제때 🙉</Title>
+      <Title>
+        <Emoji symbol="🙈" />할 일은 제때제때
+        <Emoji symbol="🙈" />
+      </Title>
       <Date />
       <Time>
         <Clock format={"HH:mm:ss"} ticking={true} />
